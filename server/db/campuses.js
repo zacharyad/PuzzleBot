@@ -12,7 +12,8 @@ const Campus = db.define('campus', {
   imageUrl: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 'http://via.digital.com/250/ffffff/000000',
+    defaultValue:
+      'https://www.timberlakechurch.com/hs-fs/hubfs/image-placeholder.jpg?width=200&height=200&name=image-placeholder.jpg',
   },
   address: {
     type: Sequelize.STRING,

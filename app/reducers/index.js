@@ -4,10 +4,10 @@ import { combineReducers } from 'redux';
 import campusesReducer from './campus';
 import studentsReducer from './student';
 
-const initialState = {
-  students: [{ firstName: 'ZachTest' }],
-  campuses: [{ name: 'CampusOne' }],
-};
+// const initialState = {
+//   students: [],
+//   campuses: [],
+// };
 
 const rootReducer = combineReducers({
   campuses: campusesReducer,

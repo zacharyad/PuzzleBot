@@ -8,7 +8,7 @@ import Root from './components/root';
 render(
   <Provider store={store}>
     <BrowserRouter>
-      <Route exact path="/" component={Root} />
+      <Root />
     </BrowserRouter>
   </Provider>,
   document.getElementById('main')

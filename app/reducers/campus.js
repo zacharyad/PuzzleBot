@@ -13,10 +13,10 @@ const gotAllCampusesFromStore = allCampuses => {
   };
 };
 //THUNK CREATORS
-const fetchCampuses = () => {
-  return dispatch => {
+export const fetchCampuses = () => {
+  return async dispatch => {
     try {
-      const { data } = axios.get('/api/campuses');
+      const { data } = await axios.get('/api/campuses');
       const action = gotAllCampusesFromStore(data);
       dispatch(action);
     } catch (error) {
@@ -26,14 +26,14 @@ const fetchCampuses = () => {
 };
 //STATE AND REDUCER
 const initialState = {
-  campuses: [],
+  campusesList: [],
 };
 const campusesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_ALL_CAMPUSES_FROM_SERVER: {
       return {
         ...state,
-        campuses: [action.allCampuses],
+        campusesList: [...state.campusesList, action.allCampuses],
       };
     }
     default: {
