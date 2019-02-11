@@ -30,7 +30,9 @@ import axios from 'axios';
 //import rootReducer from './reducers';
 import loggingMiddleware from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
-
+///////////////////
+// // campus reducer
+///////////////////
 //ACTION TYPES
 const GOT_ALL_CAMPUSES_FROM_SERVER = 'GOT_ALL_CAMPUSES_FROM_SERVER';
 //ACTION CREATORS
@@ -52,6 +54,17 @@ export const fetchCampuses = () => {
     }
   };
 };
+
+///////////////////
+// // campus reducer
+///////////////////
+
+//ACtion types
+
+//action creators
+
+//thunk creators
+
 //STATE AND REDUCER
 const initialState = {
   campusesList: [],
