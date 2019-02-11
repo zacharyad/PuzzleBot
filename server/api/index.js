@@ -1,26 +1,12 @@
 'use strict';
-
 const router = require('express').Router();
-const { Campus, Student } = require('../db/index');
-router.get('/campuses', async (req, res, next) => {
-  try {
-    const allCampuses = await Campus.findAll({ include: { all: true } });
-    res.json(allCampuses);
-  } catch (error) {
-    //Come back to add a stock error page
-    console.log(error);
-  }
-});
+//const { Campus, Student } = require('../db/index');
+const studentRoute = require('./students');
+const campusRouter = require('./campuses');
 
-router.get('/students', async (req, res, next) => {
-  try {
-    const allStudents = await Student.findAll({ include: { all: true } });
-    res.json(allStudents);
-  } catch (error) {
-    //Come back to add a stock error page
-    console.log(error);
-  }
-});
+//routing module config
+router.use('/students', studentRoute);
+router.use('/campuses', campusRouter);
 
 router.use((req, res, next) => {
   const err = new Error('API route not found!');
