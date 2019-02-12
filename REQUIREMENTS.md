@@ -19,7 +19,7 @@ The requirements below are broken into separate **tiers**, which model the way w
   - [x ] email - not empty or null; must be a valid email
   - [x ] imageUrl - with a default value
   - [x ] gpa - decimal between 0.0 and 4.0
-    NEED TO UNDERSTAND THIS -- BETTER NOT DONE YET
+    <!-- NEED TO UNDERSTAND THIS -- BETTER NOT DONE YET -->
 - [ ] Students may be associated with at most one campus. Likewise, campuses may be associated with many students
 
 - [ x] Write a route to serve up all students
@@ -27,9 +27,9 @@ The requirements below are broken into separate **tiers**, which model the way w
 
 #### Frontend
 
-- [ ] Write a campuses sub-reducer to manage campuses in your Redux store
+- [x ] Write a campuses sub-reducer to manage campuses in your Redux store
 - [ ] Write a students sub-reducer to manage students in your Redux store
-- [ ] Write a component to display a list of all campuses (just their names and images)
+- [ x] Write a component to display a list of all campuses (just their names and images)
 - [ ] Write a component to display a list of all students (just their names)
 
 <!-- this is the routing section of the components

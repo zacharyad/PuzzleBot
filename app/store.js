@@ -56,15 +56,30 @@ export const fetchCampuses = () => {
 };
 
 ///////////////////
-// // campus reducer
+// // STUDENTS reducer
 ///////////////////
 
-//ACtion types
-
+//Action types
+const GOT_ALL_STUDENTS_FROM_SERVER = 'GOT_ALL_STUDENTS_FROM_SERVER';
 //action creators
-
+const gotStudentsFromServer = studentsArrOfObjs => {
+  return {
+    type: GOT_ALL_STUDENTS_FROM_SERVER,
+    studentsArrOfObjs,
+  };
+};
 //thunk creators
-
+export const fetchStudents = () => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.get('/api/students');
+      const action = gotStudentsFromServer(data);
+      dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 //STATE AND REDUCER
 const initialState = {
   campusesList: [],
@@ -76,6 +91,13 @@ const campusesReducer = (state = initialState, action) => {
       const newState = {
         ...state,
         campusesList: [...action.allCampuses],
+      };
+      return newState;
+    }
+    case GOT_ALL_STUDENTS_FROM_SERVER: {
+      const newState = {
+        ...state,
+        studentList: [...action.studentsArrOfObjs],
       };
       return newState;
     }

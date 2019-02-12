@@ -16,12 +16,12 @@ export class CampusList extends React.Component {
     return (
       <div>
         <h1>Campus List</h1>
-        <Link to={'/campus/add'}>Add Campus To List</Link>
+        <AddCampus />
         {this.props.campusList[1] ? (
           this.props.campusList.map((campus, i) => (
-            <div key={this.props.campusList[i].id}>
-              <Link to={`/campuses/${i}`}>
-                <Campus campus={this.props.campusList[i]} />
+            <div key={campus.id}>
+              <Link to={`/campuses/${campus.id}`}>
+                <Campus campus={campus} />
               </Link>
             </div>
           ))
@@ -46,7 +46,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CampusList);
-
-// this.props.campusesList.map(campus => {
-//   <Campus state={campus} />;
-// })

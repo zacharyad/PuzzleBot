@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Campus = props => {
+  console.log(props.campus);
   return (
     <div>
       <h3>{props.campus.name}</h3>
