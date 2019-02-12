@@ -11,9 +11,10 @@ const Student = require('./students');
 
 // After you've required all of your models into this module, you should establish
 // associations (https://sequelize-guides.netlify.com/association-types/) between them here as well!
-// Example:
-//
-// Puppy.belongsTo(Owner)
+
+Campus.hasMany(Student);
+Student.belongsTo(Campus);
+//may need another id for campuses so that they can be eager loaded for that list of students under single campus page
 
 module.exports = {
   // Include your models in this exports object as well!

@@ -18,7 +18,7 @@ export class CampusList extends React.Component {
       <div>
         <AddCampus />
         <h1>Campus List</h1>
-        {this.props.campusList[1] ? (
+        {this.props.campusList[0] ? (
           this.props.campusList.map((campus, i) => (
             <div key={campus.id}>
               <Link to={`/campuses/${campus.id}`}>
@@ -27,7 +27,7 @@ export class CampusList extends React.Component {
             </div>
           ))
         ) : (
-          <div>NOOOO</div>
+          <div>There seems to be no Campuses Here</div>
         )}
       </div>
     );

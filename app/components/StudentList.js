@@ -17,7 +17,7 @@ export class StudentList extends React.Component {
       <div>
         <h1>Student List</h1>
         <Link to={'/students/add'}>Add Student To List</Link>
-        {this.props.studentList[1] ? (
+        {this.props.studentList[0] ? (
           this.props.studentList.map((student, i) => (
             <div key={student.id}>
               <Link to={`/students/${i}`}>

@@ -10,6 +10,7 @@ const Root = props => {
   const campusId = 1;
   const studentId = 1;
   console.log(props.match);
+
   return (
     <div>
       <Header />
@@ -22,10 +23,7 @@ const Root = props => {
           render={() => <Campus campusId={campusId} />}
         />
         <Route exact path="/students/" render={() => <StudentList />} />
-        <Route
-          path="/students/:studntId"
-          render={() => <Student studentId={studentId} />}
-        />
+        <Route path="/students/:studntId" component={Student} />
       </Switch>
     </div>
   );
