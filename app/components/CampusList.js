@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchCampuses } from '../store';
 import Campus from './Campus';
+import AddCampus from './AddCampus';
 
 export class CampusList extends React.Component {
   constructor(props) {
@@ -15,8 +16,8 @@ export class CampusList extends React.Component {
   render() {
     return (
       <div>
-        <h1>Campus List</h1>
         <AddCampus />
+        <h1>Campus List</h1>
         {this.props.campusList[1] ? (
           this.props.campusList.map((campus, i) => (
             <div key={campus.id}>

@@ -27,10 +27,12 @@ The requirements below are broken into separate **tiers**, which model the way w
 
 #### Frontend
 
-- [x ] Write a campuses sub-reducer to manage campuses in your Redux store
+<!-- I wrote it all in a single reducer because I was struggling to get it to work -->
+
+- [ ] Write a campuses sub-reducer to manage campuses in your Redux store
 - [ ] Write a students sub-reducer to manage students in your Redux store
 - [ x] Write a component to display a list of all campuses (just their names and images)
-- [ ] Write a component to display a list of all students (just their names)
+- [ X] Write a component to display a list of all students (just their names)
 
 <!-- this is the routing section of the components
 this is rendewring the right compent, but issue with reducer and props showing and mapping over the right info -->

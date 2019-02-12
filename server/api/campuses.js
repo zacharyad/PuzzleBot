@@ -23,3 +23,12 @@ router.post('/add', async (req, res, next) => {
 });
 
 module.exports = router;
+
+//PostMan dummy post data object
+
+// {
+//   "name": "bagain",
+//   "imageUrl": "https://uc175bb0aaf3c3410fab2890acd8.dl.dropboxusercontent.com/cd/0/inline/AbPnboZ_hZja_3zrSt7lF3mTuEBESFKH6LQmciAfmwxtxqnDy-3K_t0zzXRbE8eeETgW2Dqjfo5guF4BxksmymMGxDWjEnPk31a8D01ED2dW6w/file#",
+//   "address": "1111 one road",
+//   "description":"this is a great new school that was created"
+//   }
