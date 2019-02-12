@@ -1,34 +1,36 @@
 import React from 'react';
+import { Route, withRouter, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Header from './Header';
-import { Route, Switch } from 'react-router-dom';
 import CampusList from './CampusList';
 import StudentList from './StudentList';
 import SplashHero from './SplashHero';
-import Campus from './Campus';
 import Student from './Student';
-const Root = props => {
-  const campusId = 1;
-  const studentId = 1;
-  console.log(props.match);
+import SingleCampus from './SingleCampus';
+import AddCampus from './AddCampus';
 
-  return (
-    <div>
-      <Header />
-      <hr />
-      <Switch>
-        <Route exact path="/" render={() => <SplashHero />} />
-        <Route exact path="/campuses/" render={() => <CampusList />} />
-        <Route
-          path={`/campuses/:campusId`}
-          render={() => <Campus campusId={campusId} />}
-        />
-        <Route exact path="/students/" render={() => <StudentList />} />
-        <Route path="/students/:studntId" component={Student} />
-      </Switch>
-    </div>
-  );
-};
-export default Root;
+class Root extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    //console.log('inside the root: ', this.props.match.params);
+    return (
+      <div>
+        <Header />
+        <hr />
+        <Switch>
+          <Route exact path="/" component={SplashHero} />
+          <Route exact path="/campuses" component={CampusList} />
+          <Route exact path="/campuses/add" component={AddCampus} />
+          <Route path={`/campuses/:campusId`} component={SingleCampus} />
 
-{
+          <Route exact path="/students/" component={StudentList} />
+
+          <Route path="/students/:studentId" component={Student} />
+        </Switch>
+      </div>
+    );
+  }
 }
+export default withRouter(Root);

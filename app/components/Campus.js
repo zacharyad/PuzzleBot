@@ -1,19 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchSingleCampus } from '../store';
 
-const Campus = props => {
-  console.log(props.campus);
-  return (
-    <div>
-      <h3>{props.campus.name}</h3>
-      <p>
-        {props.campus.description
-          .split('. ')
-          .slice(0, 1)
-          .join(' ') + '.'}
-      </p>
-      <img src={props.campus.imageUrl} />
-    </div>
-  );
-};
+export class Campus extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    this.props.fetchSingleCampus();
+  }
+  render() {
+    const campus = this.props.campus;
+    return (
+      <div>
+        <h3>{campus.name}</h3>
+        <h4>{campus.description}</h4>
+        <img src={campus.imageUrl} />
+      </div>
+    );
+  }
+}
 
-export default Campus;
+const mapStateToProps = state => ({
+  campusState: state.singleCampus,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchSingleCampus: () => dispatch(fetchSingleCampus()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Campus);

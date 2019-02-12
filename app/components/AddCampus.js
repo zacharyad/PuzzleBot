@@ -4,13 +4,15 @@ export default class AddCampus extends React.Component {
   constructor(props) {
     super(props);
   }
+
   handleSubmit(event) {
     event.preventDefault();
-    console.log(event);
+    console.log('Event from the submit:', event);
     // const name = event.target.value.name;
-    // const description = event.target.value.description;
+
     // const imageUrl = event.target.value.imageUrl;
     // const address = event.target.value.address;
+
     // const dataToSend = {
     //   name,
     //   description,
