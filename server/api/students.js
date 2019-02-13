@@ -6,7 +6,7 @@ router.get('/', async (req, res, next) => {
     const allStudents = await Student.findAll({ include: { all: true } });
     res.json(allStudents);
   } catch (error) {
-    console.log('in post error', error);
+    console.log(error);
     next(error);
   }
 });
@@ -46,13 +46,3 @@ router.delete('/:campusId', async (req, res, next) => {
 });
 
 module.exports = router;
-
-//test Data for PostMan
-
-// {
-//   "firstName": "Zed",
-//   "lastName": "Junior",
-//   "imageUrl": "https://uc175bb0aaf3c3410fab2890acd8.dl.dropboxusercontent.com/cd/0/inline/AbPnboZ_hZja_3zrSt7lF3mTuEBESFKH6LQmciAfmwxtxqnDy-3K_t0zzXRbE8eeETgW2Dqjfo5guF4BxksmymMGxDWjEnPk31a8D01ED2dW6w/file#",
-//   "email": "ZedMan@gmail.com",
-//   "gpa": 3.6
-//   }

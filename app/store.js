@@ -1,35 +1,8 @@
-// import { createStore, applyMiddleware } from 'redux';
-// import { composeWithDevTools } from 'redux-devtools-extension';
-// import axios from 'axios';
-// import rootReducer from './reducers';
-// import loggingMiddleware from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
-// import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
-
-// const store = createStore(
-//   rootReducer,
-//   composeWithDevTools(
-//     applyMiddleware(
-//       // `withExtraArgument` gives us access to axios in our async action creators!
-//       // https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
-//       thunkMiddleware.withExtraArgument({ axios }),
-//       loggingMiddleware
-//     )
-//   )
-// );
-// export default store;
-
-////////
-
-////////
-
 import { composeWithDevTools } from 'redux-devtools-extension';
-// import rootReducer from './reducers';
 import { createStore, applyMiddleware } from 'redux';
-//import { composeWithDevTools } from 'redux-devtools-extension';
 import axios from 'axios';
-//import rootReducer from './reducers';
-import loggingMiddleware from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
-import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
+import loggingMiddleware from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 ///////////////////
 // // campus reducer
 ///////////////////
@@ -205,7 +178,7 @@ const initialState = {
   studentList: [],
   singleStudent: {},
 };
-const campusesReducer = (state = initialState, action) => {
+const Reducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_ALL_CAMPUSES_FROM_SERVER: {
       const newState = {
@@ -268,14 +241,7 @@ const campusesReducer = (state = initialState, action) => {
 };
 
 const store = createStore(
-  campusesReducer,
-  composeWithDevTools(
-    applyMiddleware(
-      // `withExtraArgument` gives us access to axios in our async action creators!
-      // https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
-      thunkMiddleware,
-      loggingMiddleware
-    )
-  )
+  Reducer,
+  composeWithDevTools(applyMiddleware(thunkMiddleware, loggingMiddleware))
 );
 export default store;

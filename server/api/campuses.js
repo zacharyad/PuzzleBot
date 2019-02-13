@@ -46,12 +46,3 @@ router.delete('/:campusId', async (req, res, next) => {
 });
 
 module.exports = router;
-
-//PostMan dummy post data object
-
-// {
-//   "name": "bagain",
-//   "imageUrl": "https://picsum.photos/458/354?random&time=1549929620020",
-//   "address": "1111 one road",
-//   "description":"this is a great new school that was created"
-//   }

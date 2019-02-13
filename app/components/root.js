@@ -16,7 +16,6 @@ class Root extends React.Component {
     super(props);
   }
   render() {
-    //console.log('inside the root: ', this.props.match.params);
     return (
       <div>
         <Header />

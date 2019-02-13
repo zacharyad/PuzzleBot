@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import { fetchSingleStudent } from '../store';
 
 export class SingleStudent extends React.Component {
@@ -12,7 +13,8 @@ export class SingleStudent extends React.Component {
   }
 
   findCampus(id) {
-    if (id) return this.props.studentState[0].campus.name;
+    if (id)
+      return `Student's Campus: ${this.props.studentState[0].campus.name}`;
     else return 'Sorry this student doesnt have a campus yet.';
   }
 
@@ -26,7 +28,9 @@ export class SingleStudent extends React.Component {
             <h5>{`Email: ${student.email}`}</h5>
             <h5>{`GPA: ${student.gpa}`}</h5>
             <img src={student.imageUrl} />
-            <h4>{this.findCampus(student.campusId)}</h4>
+            <Link to={`/campuses/${student.campus.id}`}>
+              <h4>{this.findCampus(student.campusId)}</h4>
+            </Link>
           </div>
         ) : (
           <div>Sorry no student</div>
@@ -44,7 +48,9 @@ const mapDispatchToProps = dispatch => ({
   fetchStudent: id => dispatch(fetchSingleStudent(id)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingleStudent);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SingleStudent)
+);
