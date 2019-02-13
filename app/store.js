@@ -36,6 +36,7 @@ import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-t
 //ACTION TYPES
 const GOT_ALL_CAMPUSES_FROM_SERVER = 'GOT_ALL_CAMPUSES_FROM_SERVER';
 const GOT_A_SINGLE_CAMPUS = 'GOT_A_SINGLE_CAMPUS';
+
 //ACTION CREATORS
 const gotAllCampusesFromStore = allCampuses => {
   return {
@@ -80,11 +81,19 @@ export const fetchSingleCampus = id => {
 
 //Action types
 const GOT_ALL_STUDENTS_FROM_SERVER = 'GOT_ALL_STUDENTS_FROM_SERVER';
+const GOT_SINGLE_STUDENT = 'GOT_SINGLE_STUDENT';
 //action creators
 const gotStudentsFromServer = studentsArrOfObjs => {
   return {
     type: GOT_ALL_STUDENTS_FROM_SERVER,
     studentsArrOfObjs,
+  };
+};
+
+const gotASingleStudent = student => {
+  return {
+    type: GOT_SINGLE_STUDENT,
+    student,
   };
 };
 //thunk creators
@@ -99,11 +108,27 @@ export const fetchStudents = () => {
     }
   };
 };
+
+export const fetchSingleStudent = id => {
+  return async dispatch => {
+    try {
+      console.log('id inside of thunk: ', id);
+      const { data } = await axios.get(`/api/students/${id}`);
+      const action = gotASingleStudent(data);
+      console.log('INSIDE THUNK: ', data);
+      dispatch(action);
+    } catch (error) {
+      console.log('error from thunk: ', error);
+    }
+  };
+};
+
 //STATE AND REDUCER
 const initialState = {
   campusesList: [],
   singleCampus: {},
   studentList: [],
+  singleStudent: {},
 };
 const campusesReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -125,6 +150,13 @@ const campusesReducer = (state = initialState, action) => {
       const newState = {
         ...state,
         singleCampus: action.campus,
+      };
+      return newState;
+    }
+    case GOT_SINGLE_STUDENT: {
+      const newState = {
+        ...state,
+        singleStudent: action.student,
       };
       return newState;
     }

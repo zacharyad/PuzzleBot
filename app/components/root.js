@@ -7,7 +7,9 @@ import StudentList from './StudentList';
 import SplashHero from './SplashHero';
 import Student from './Student';
 import SingleCampus from './SingleCampus';
+import SingleStudent from './SingleStudent';
 import AddCampus from './AddCampus';
+import AddStudent from './AddStudent';
 
 class Root extends React.Component {
   constructor(props) {
@@ -21,13 +23,14 @@ class Root extends React.Component {
         <hr />
         <Switch>
           <Route exact path="/" component={SplashHero} />
+
           <Route exact path="/campuses" component={CampusList} />
           <Route exact path="/campuses/add" component={AddCampus} />
           <Route path={`/campuses/:campusId`} component={SingleCampus} />
 
-          <Route exact path="/students/" component={StudentList} />
-
-          <Route path="/students/:studentId" component={Student} />
+          <Route exact path="/students" component={StudentList} />
+          <Route exact path="/students/add" component={AddStudent} />
+          <Route path="/students/:studentId" component={SingleStudent} />
         </Switch>
       </div>
     );

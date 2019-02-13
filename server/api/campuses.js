@@ -1,148 +1,60 @@
-// import { createStore, applyMiddleware } from 'redux';
-// import { composeWithDevTools } from 'redux-devtools-extension';
-// import axios from 'axios';
-// import rootReducer from './reducers';
-// import loggingMiddleware from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
-// import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
+const router = require('express').Router();
+const { Campus } = require('../db/index');
 
-// const store = createStore(
-//   rootReducer,
-//   composeWithDevTools(
-//     applyMiddleware(
-//       // `withExtraArgument` gives us access to axios in our async action creators!
-//       // https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
-//       thunkMiddleware.withExtraArgument({ axios }),
-//       loggingMiddleware
-//     )
-//   )
-// );
-// export default store;
-
-////////
-
-////////
-
-import { composeWithDevTools } from 'redux-devtools-extension';
-// import rootReducer from './reducers';
-import { createStore, applyMiddleware } from 'redux';
-//import { composeWithDevTools } from 'redux-devtools-extension';
-import axios from 'axios';
-//import rootReducer from './reducers';
-import loggingMiddleware from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
-import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
-///////////////////
-// // campus reducer
-///////////////////
-//ACTION TYPES
-const GOT_ALL_CAMPUSES_FROM_SERVER = 'GOT_ALL_CAMPUSES_FROM_SERVER';
-const GOT_A_SINGLE_CAMPUS = 'GOT_A_SINGLE_CAMPUS';
-//ACTION CREATORS
-const gotAllCampusesFromStore = allCampuses => {
-  return {
-    type: GOT_ALL_CAMPUSES_FROM_SERVER,
-    allCampuses,
-  };
-};
-const gotASingleCampus = campus => {
-  return {
-    type: GOT_A_SINGLE_CAMPUS,
-    campus,
-  };
-};
-//THUNK CREATORS
-export const fetchCampuses = () => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.get('/api/campuses');
-      const action = gotAllCampusesFromStore(data);
-      dispatch(action);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const fetchSingleCampus = id => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.get(`/api/campuses/${id}`);
-      const action = gotASingleCampus(data);
-      dispatch(action);
-    } catch (error) {
-      console.log('error from thunk: ', error);
-    }
-  };
-};
-
-///////////////////
-// // STUDENTS reducer
-///////////////////
-
-//Action types
-const GOT_ALL_STUDENTS_FROM_SERVER = 'GOT_ALL_STUDENTS_FROM_SERVER';
-//action creators
-const gotStudentsFromServer = studentsArrOfObjs => {
-  return {
-    type: GOT_ALL_STUDENTS_FROM_SERVER,
-    studentsArrOfObjs,
-  };
-};
-//thunk creators
-export const fetchStudents = () => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.get('/api/students');
-      const action = gotStudentsFromServer(data);
-      dispatch(action);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-//STATE AND REDUCER
-const initialState = {
-  campusesList: [],
-  singleCampus: {},
-  studentList: [],
-};
-const campusesReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GOT_ALL_CAMPUSES_FROM_SERVER: {
-      const newState = {
-        ...state,
-        campusesList: [...action.allCampuses],
-      };
-      return newState;
-    }
-    case GOT_ALL_STUDENTS_FROM_SERVER: {
-      const newState = {
-        ...state,
-        studentList: [...action.studentsArrOfObjs],
-      };
-      return newState;
-    }
-    case GOT_A_SINGLE_CAMPUS: {
-      const newState = {
-        ...state,
-        singleCampus: action.campus,
-      };
-      return newState;
-    }
-    default: {
-      return state;
-    }
+router.get('/', async (req, res, next) => {
+  try {
+    const allCampuses = await Campus.findAll({ include: { all: true } });
+    res.json(allCampuses);
+  } catch (error) {
+    //Come back to add a stock error page
+    console.log(error);
+    next(error);
   }
-};
+});
 
-const store = createStore(
-  campusesReducer,
-  composeWithDevTools(
-    applyMiddleware(
-      // `withExtraArgument` gives us access to axios in our async action creators!
-      // https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
-      thunkMiddleware,
-      loggingMiddleware
-    )
-  )
-);
-export default store;
+router.get('/:campusId', async (req, res, next) => {
+  try {
+    const id = req.params.campusId;
+    console.log('*******************', id);
+    const singleCampuses = await Campus.findAll({
+      where: { id },
+      include: { all: true },
+    });
+    res.json(singleCampuses);
+  } catch (error) {
+    //Come back to add a stock error page
+    console.log(error);
+    nexrt(error);
+  }
+});
+
+router.post('/add', async (req, res, next) => {
+  try {
+    const campusToAdd = await Campus.create(req.body);
+    res.json(campusToAdd);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
+router.delete('/:campusId', async (req, res, next) => {
+  try {
+    const id = req.params.campusId;
+    const deletedCampus = await Campus.destroy({ where: { id } });
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = router;
+
+//PostMan dummy post data object
+
+// {
+//   "name": "bagain",
+//   "imageUrl": "https://picsum.photos/458/354?random&time=1549929620020",
+//   "address": "1111 one road",
+//   "description":"this is a great new school that was created"
+//   }

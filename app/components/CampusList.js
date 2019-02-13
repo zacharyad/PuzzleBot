@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Campus from './Campus';
-import AddCampus from './AddCampus';
-import SingleCampus from './SingleCampus';
+
 import { fetchCampuses } from '../store';
+
 export class CampusList extends React.Component {
   constructor(props) {
     super(props);
@@ -18,13 +18,11 @@ export class CampusList extends React.Component {
     console.log('props from campusList: ', this.props);
     return (
       <div>
-        <Link to="/campuses/add" component={<AddCampus />}>
-          Add a new Campus
-        </Link>
+        <Link to="/campuses/add">Add a new Campus</Link>
         <hr />
         <h1>Campus List</h1>
         {this.props.campusList[0] ? (
-          this.props.campusList.map((campus, i) => (
+          this.props.campusList.map(campus => (
             <div key={campus.id}>
               <Link to={`/campuses/${campus.id}`}>
                 <Campus campus={campus} />

@@ -12,6 +12,21 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/:studentId', async (req, res, next) => {
+  try {
+    const id = req.params.studentId;
+    console.log('inside the student/:id route: ', id);
+    const singleStudent = await Student.findAll({
+      where: { id },
+    });
+    res.json(singleStudent);
+  } catch (error) {
+    //Come back to add a stock error page
+    console.log(error);
+    next(error);
+  }
+});
+
 router.post('/add', async (req, res, next) => {
   try {
     const studentsToAdd = await Student.create(req.body);
