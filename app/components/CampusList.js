@@ -2,12 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Campus from './Campus';
-
-import { fetchCampuses } from '../store';
+import { fetchCampuses, removeCampusFromServer } from '../store';
 
 export class CampusList extends React.Component {
   constructor(props) {
     super(props);
+    this.campusRemoveHandler = this.campusRemoveHandler.bind(this);
+  }
+
+  campusRemoveHandler(id) {
+    this.props.campusRemove(id);
+    this.props.fetchCampusList();
   }
 
   componentDidMount() {
@@ -25,8 +30,14 @@ export class CampusList extends React.Component {
             <div key={campus.id}>
               <Link to={`/campuses/${campus.id}`}>
                 <Campus campus={campus} />
-                <hr />
               </Link>
+              <button
+                onClick={() => this.campusRemoveHandler(campus.id)}
+                type="button"
+              >
+                <strong>X</strong>
+              </button>
+              <hr />
             </div>
           ))
         ) : (
@@ -43,6 +54,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     fetchCampusList: () => dispatch(fetchCampuses()),
+    campusRemove: id => dispatch(removeCampusFromServer(id)),
   };
 };
 

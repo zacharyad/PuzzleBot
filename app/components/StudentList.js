@@ -20,12 +20,9 @@ export class StudentList extends React.Component {
     this.props.fetchStudentList();
   }
   render() {
-    console.log(this.props);
     return (
       <div>
-        <Link to={'/students/add'} component={AddStudent}>
-          Add Student To List
-        </Link>
+        <Link to={'/students/add'}>Add Student To List</Link>
         <hr />
         <h1>Student List</h1>
         {this.props.studentList[0] ? (

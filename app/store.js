@@ -37,9 +37,9 @@ import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-t
 const GOT_ALL_CAMPUSES_FROM_SERVER = 'GOT_ALL_CAMPUSES_FROM_SERVER';
 const GOT_A_SINGLE_CAMPUS = 'GOT_A_SINGLE_CAMPUS';
 const ADD_CAMPUS = 'ADD_CAMPUS';
-
+const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
 //ACTION CREATORS
-const gotAllCampusesFromStore = allCampuses => {
+const gotAllCampusesFromServer = allCampuses => {
   return {
     type: GOT_ALL_CAMPUSES_FROM_SERVER,
     allCampuses,
@@ -58,12 +58,19 @@ const addCampusToServer = campusObj => {
     campusObj,
   };
 };
+
+const removeCampus = () => {
+  return {
+    type: REMOVE_CAMPUS,
+  };
+};
+
 //THUNK CREATORS
 export const fetchCampuses = () => {
   return async dispatch => {
     try {
       const { data } = await axios.get('/api/campuses');
-      const action = gotAllCampusesFromStore(data);
+      const action = gotAllCampusesFromServer(data);
       dispatch(action);
     } catch (error) {
       console.log(error);
@@ -94,6 +101,17 @@ export const addCampusThunk = campusObj => {
     }
   };
 };
+export const removeCampusFromServer = campusId => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.delete(`/api/campuses/${campusId}`);
+      const action = removeCampus(data);
+      dispatch(action);
+    } catch (error) {
+      console.log('error from thunk: ', error);
+    }
+  };
+};
 
 ///////////////////
 // // STUDENTS reducer
@@ -103,6 +121,7 @@ export const addCampusThunk = campusObj => {
 const GOT_ALL_STUDENTS_FROM_SERVER = 'GOT_ALL_STUDENTS_FROM_SERVER';
 const GOT_SINGLE_STUDENT = 'GOT_SINGLE_STUDENT';
 const ADD_STUDENT = 'ADD_STUDENT';
+const REMOVE_STUDENT = 'REMOVE_STUDENT';
 //action creators
 const gotStudentsFromServer = studentsArrOfObjs => {
   return {
@@ -122,6 +141,12 @@ const addStudent = newStuObj => {
   return {
     type: ADD_STUDENT,
     newStuObj,
+  };
+};
+
+const removeStudent = () => {
+  return {
+    type: REMOVE_STUDENT,
   };
 };
 //thunk creators
@@ -165,7 +190,7 @@ export const removeStudentFromServer = id => {
   return async dispatch => {
     try {
       const { data } = await axios.delete(`/api/students/${id}`);
-      const action = addStudent(data);
+      const action = removeStudent(data);
       dispatch(action);
     } catch (error) {
       console.log('error from thunk: ', error);
@@ -189,10 +214,10 @@ const campusesReducer = (state = initialState, action) => {
       };
       return newState;
     }
-    case GOT_ALL_STUDENTS_FROM_SERVER: {
+    case ADD_CAMPUS: {
       const newState = {
         ...state,
-        studentList: [...action.studentsArrOfObjs],
+        campusesList: [...state.campusesList, action.campusObj],
       };
       return newState;
     }
@@ -203,10 +228,16 @@ const campusesReducer = (state = initialState, action) => {
       };
       return newState;
     }
-    case ADD_CAMPUS: {
+    case REMOVE_CAMPUS: {
       const newState = {
         ...state,
-        campusesList: [...state.campusesList, action.campusObj],
+      };
+      return newState;
+    }
+    case GOT_ALL_STUDENTS_FROM_SERVER: {
+      const newState = {
+        ...state,
+        studentList: [...action.studentsArrOfObjs],
       };
       return newState;
     }
@@ -221,6 +252,12 @@ const campusesReducer = (state = initialState, action) => {
       const newState = {
         ...state,
         studentList: [...state.studentList, action.newStuObj],
+      };
+      return newState;
+    }
+    case REMOVE_STUDENT: {
+      const newState = {
+        ...state,
       };
       return newState;
     }
