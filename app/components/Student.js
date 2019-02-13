@@ -9,7 +9,6 @@ export class Student extends React.Component {
     this.props.fetchSingleStudent();
   }
   render() {
-    console.log('******props.students: ', this.props.student);
     const student = this.props.student;
     return (
       <div>

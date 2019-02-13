@@ -7,11 +7,9 @@ export class SingleStudent extends React.Component {
     super(props);
   }
   componentDidMount() {
-    console.log('********* ', this.props.match.params.studentId);
     this.props.fetchStudent(this.props.match.params.studentId);
   }
   render() {
-    console.log('SingleStudent: ', this.props);
     const student = this.props.studentState[0];
     return (
       <div>

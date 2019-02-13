@@ -15,7 +15,6 @@ router.get('/', async (req, res, next) => {
 router.get('/:studentId', async (req, res, next) => {
   try {
     const id = req.params.studentId;
-    console.log('inside the student/:id route: ', id);
     const singleStudent = await Student.findAll({
       where: { id },
     });

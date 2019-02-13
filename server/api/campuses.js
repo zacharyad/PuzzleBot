@@ -6,7 +6,6 @@ router.get('/', async (req, res, next) => {
     const allCampuses = await Campus.findAll({ include: { all: true } });
     res.json(allCampuses);
   } catch (error) {
-    //Come back to add a stock error page
     console.log(error);
     next(error);
   }
@@ -15,14 +14,12 @@ router.get('/', async (req, res, next) => {
 router.get('/:campusId', async (req, res, next) => {
   try {
     const id = req.params.campusId;
-    console.log('*******************', id);
     const singleCampuses = await Campus.findAll({
       where: { id },
       include: { all: true },
     });
     res.json(singleCampuses);
   } catch (error) {
-    //Come back to add a stock error page
     console.log(error);
     nexrt(error);
   }

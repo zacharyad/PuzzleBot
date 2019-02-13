@@ -7,11 +7,9 @@ export class SingleCampus extends React.Component {
     super(props);
   }
   componentDidMount() {
-    console.log('********* ', this.props.match.params.campusId);
     this.props.fetchSingleCampus(this.props.match.params.campusId);
   }
   render() {
-    console.log('SingleCampus: ', this.props.campusState[0]);
     return (
       <div>
         {this.props.campusState[0] ? (

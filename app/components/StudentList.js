@@ -13,7 +13,6 @@ export class StudentList extends React.Component {
     this.props.fetchStudentList();
   }
   render() {
-    console.log('from student list: ', this.props);
     return (
       <div>
         <Link to={'/students/add'} component={AddStudent}>

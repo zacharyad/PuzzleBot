@@ -15,7 +15,6 @@ export class CampusList extends React.Component {
   }
 
   render() {
-    console.log('props from campusList: ', this.props);
     return (
       <div>
         <Link to="/campuses/add">Add a new Campus</Link>

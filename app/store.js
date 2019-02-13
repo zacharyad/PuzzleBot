@@ -112,10 +112,8 @@ export const fetchStudents = () => {
 export const fetchSingleStudent = id => {
   return async dispatch => {
     try {
-      console.log('id inside of thunk: ', id);
       const { data } = await axios.get(`/api/students/${id}`);
       const action = gotASingleStudent(data);
-      console.log('INSIDE THUNK: ', data);
       dispatch(action);
     } catch (error) {
       console.log('error from thunk: ', error);
