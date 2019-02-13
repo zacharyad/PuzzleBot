@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { addStudentToServer } from '../store';
+
 export class AddStudent extends React.Component {
   constructor(props) {
     super(props);
@@ -53,6 +55,7 @@ export class AddStudent extends React.Component {
 
     console.log('inside submitHandler, props ', this.props);
     this.props.studentAdd(studentDataToSend);
+    this.props.history.push('/students');
     //   //this will be the reducer fetch to add the camput form data to api
   }
 
@@ -124,7 +127,9 @@ const mapDispatchToProps = dispatch => ({
   studentAdd: stuObj => dispatch(addStudentToServer(stuObj)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(AddStudent);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(AddStudent)
+);
