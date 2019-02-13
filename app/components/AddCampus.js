@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { addCampusThunk } from '../store';
 
 export class AddCampus extends React.Component {
@@ -10,6 +11,7 @@ export class AddCampus extends React.Component {
       description: '',
       address: '',
       imageUrl: '',
+      campusAdded: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -47,11 +49,12 @@ export class AddCampus extends React.Component {
 
     console.log('inside the campus submithandler: ', campusToSendToServer);
     this.props.campusAdd(campusToSendToServer);
+    this.props.history.push('/campuses');
+    //this.setState({ campusAdd: true });
     //this will be the reducer fetch to add the camput form data to api
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className={`wrapper`}>
         <h2>Add Campus Page</h2>
@@ -112,7 +115,9 @@ const mapDispatchToProps = dispatch => ({
   campusAdd: campusObj => dispatch(addCampusThunk(campusObj)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(AddCampus);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(AddCampus)
+);
