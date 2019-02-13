@@ -25,6 +25,7 @@ export class CampusList extends React.Component {
         <Link to="/campuses/add">Add a new Campus</Link>
         <hr />
         <h1>Campus List</h1>
+        <hr />
         {this.props.campusList[0] ? (
           this.props.campusList.map(campus => (
             <div key={campus.id}>

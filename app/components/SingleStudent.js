@@ -5,18 +5,17 @@ import { fetchSingleStudent } from '../store';
 export class SingleStudent extends React.Component {
   constructor(props) {
     super(props);
+    this.findCampus = this.findCampus.bind(this);
   }
   componentDidMount() {
     this.props.fetchStudent(this.props.match.params.studentId);
   }
 
   findCampus(id) {
-    console.log(
-      'we got to the find campus',
-      this.props.studentState[0].campus.name
-    );
-    return this.props.studentState[0].campus.name;
+    if (id) return this.props.studentState[0].campus.name;
+    else return 'Sorry this student doesnt have a campus yet.';
   }
+
   render() {
     const student = this.props.studentState[0];
     return (
