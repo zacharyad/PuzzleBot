@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStudents, removeStudentFromServer } from '../store';
 import Student from './Student';
-import AddStudent from './AddStudent';
+
 export class StudentList extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +11,6 @@ export class StudentList extends React.Component {
   }
 
   studentRemoveHandler(idForStu) {
-    console.log('Got to studentRemoveHandler');
     this.props.studentRemove(idForStu);
     this.props.fetchStudentList();
   }
@@ -35,14 +34,14 @@ export class StudentList extends React.Component {
                 onClick={() => this.studentRemoveHandler(student.id)}
                 type="button"
               >
-                <strong>X</strong>
+                {`Remove ${student.firstName} ${student.lastName}`}
               </button>
 
               <hr />
             </div>
           ))
         ) : (
-          <div>No Students Seem to be enrolled, sorry.</div>
+          <div>Sorry, No Students enrolled in any Campus.</div>
         )}
       </div>
     );

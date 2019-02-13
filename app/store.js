@@ -85,7 +85,7 @@ export const fetchSingleCampus = id => {
       const action = gotASingleCampus(data);
       dispatch(action);
     } catch (error) {
-      console.log('error from thunk: ', error);
+      console.log(error);
     }
   };
 };
@@ -97,7 +97,7 @@ export const addCampusThunk = campusObj => {
       const action = addCampusToServer(data);
       dispatch(action);
     } catch (error) {
-      console.log('error from thunk: ', error);
+      console.log(error);
     }
   };
 };
@@ -108,7 +108,7 @@ export const removeCampusFromServer = campusId => {
       const action = removeCampus(data);
       dispatch(action);
     } catch (error) {
-      console.log('error from thunk: ', error);
+      console.log(error);
     }
   };
 };
@@ -157,7 +157,7 @@ export const fetchStudents = () => {
       const action = gotStudentsFromServer(data);
       dispatch(action);
     } catch (error) {
-      console.log('error getting all students', error);
+      console.log(error);
     }
   };
 };
@@ -169,7 +169,7 @@ export const fetchSingleStudent = id => {
       const action = gotASingleStudent(data);
       dispatch(action);
     } catch (error) {
-      console.log('error from thunk: ', error);
+      console.log(error);
     }
   };
 };
@@ -181,7 +181,7 @@ export const addStudentToServer = stuObj => {
       const action = addStudent(data);
       dispatch(action);
     } catch (error) {
-      console.log('error from thunk: ', error);
+      console.log(error);
     }
   };
 };
@@ -193,7 +193,7 @@ export const removeStudentFromServer = id => {
       const action = removeStudent(data);
       dispatch(action);
     } catch (error) {
-      console.log('error from thunk: ', error);
+      console.log(error);
     }
   };
 };

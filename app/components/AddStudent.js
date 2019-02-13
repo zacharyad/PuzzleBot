@@ -42,7 +42,7 @@ export class AddStudent extends React.Component {
     const firstName = this.state.firstName;
     const lastName = this.state.lastName;
     const email = this.state.email;
-    const gpa = parseFloat(this.state.gpa);
+    const gpa = +this.state.gpa;
     const imageUrl = this.state.imageUrl;
 
     const studentDataToSend = {
@@ -53,33 +53,30 @@ export class AddStudent extends React.Component {
       gpa,
     };
 
-    console.log('inside submitHandler, props ', this.props);
     this.props.studentAdd(studentDataToSend);
     this.props.history.push('/students');
-    //   //this will be the reducer fetch to add the camput form data to api
   }
 
   render() {
-    console.log('from the render for nameChangeHandler ', this.state);
     return (
       <div className={`wrapper`}>
         <h2>Add Student</h2>
         <hr />
         <div className="form-Wrapper">
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="name">First Name: </label>
+            <label htmlFor="fName">First Name: </label>
             <input
               onChange={this.onFNameChange}
-              name="name"
+              name="fName"
               type="text"
               placeholder="First Name"
               value={this.state.firstName}
             />
             <br />
-            <label htmlFor="name">Last Name: </label>
+            <label htmlFor="lName">Last Name: </label>
             <input
               onChange={this.onLNameChange}
-              name="name"
+              name="lName"
               type="text"
               placeholder="Last Name"
               value={this.state.lastName}
@@ -87,9 +84,9 @@ export class AddStudent extends React.Component {
             <br />
             <label htmlFor="gpa">GPA: </label>
             <input
-              name="description"
+              name="gpa"
               onChange={this.onGpaChange}
-              type="text"
+              type="number"
               min="0.0"
               max="4.0"
               value={this.state.gpa}

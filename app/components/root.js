@@ -22,15 +22,15 @@ class Root extends React.Component {
         <Header />
         <hr />
         <Switch>
-          <Route exact path="/" component={SplashHero} />
-
           <Route exact path="/campuses" component={CampusList} />
-          <Route exact path="/campuses/add" component={AddCampus} />
+          <Route path="/campuses/add" component={AddCampus} />
           <Route path={`/campuses/:campusId`} component={SingleCampus} />
 
           <Route exact path="/students" component={StudentList} />
-          <Route exact path="/students/add" component={AddStudent} />
+          <Route path="/students/add" component={AddStudent} />
           <Route path="/students/:studentId" component={SingleStudent} />
+
+          <Route exact path="/" component={SplashHero} />
         </Switch>
       </div>
     );

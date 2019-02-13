@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleStudent } from '../store';
+
 export class Student extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    this.props.fetchSingleStudent();
+    this.props.fetchStudent(this.props.student.id);
   }
   render() {
     const student = this.props.student;
@@ -23,7 +24,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSingleStudent: id => dispatch(fetchSingleStudent(id)),
+  fetchStudent: id => dispatch(fetchSingleStudent(id)),
 });
 
 export default connect(

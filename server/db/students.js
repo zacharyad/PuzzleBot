@@ -30,9 +30,8 @@ const Student = db.define('student', {
     defaultValue: 'http://via.digital.com/250/ffffff/000000',
   },
   gpa: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL,
     validate: {
-      isFloat: true,
       min: 0,
       max: 4,
     },

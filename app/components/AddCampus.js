@@ -11,7 +11,6 @@ export class AddCampus extends React.Component {
       description: '',
       address: '',
       imageUrl: '',
-      campusAdded: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -47,11 +46,8 @@ export class AddCampus extends React.Component {
       address,
     };
 
-    console.log('inside the campus submithandler: ', campusToSendToServer);
     this.props.campusAdd(campusToSendToServer);
     this.props.history.push('/campuses');
-    //this.setState({ campusAdd: true });
-    //this will be the reducer fetch to add the camput form data to api
   }
 
   render() {
@@ -65,41 +61,41 @@ export class AddCampus extends React.Component {
             <label htmlFor="name" />
             <input
               required
-              onChange={this.handleNameChange}
-              value={this.state.name}
-              name="name"
               type="text"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleNameChange}
               placeholder="Name of Campus..."
             />
             <br />
             <h3>Description</h3>
             <label htmlFor="description" />
             <textarea
-              rows="20"
-              cols="50"
-              name="description"
               type="text"
+              name="description"
               value={this.state.description}
+              cols="50"
+              rows="20"
               onChange={this.handleDescriptionChange}
               placeholder="Describe Campus..."
             />
             <br />
             <label htmlFor="imageUrl">Image Url: </label>
             <input
+              type="text"
+              name="imageUrl"
               value={this.state.imageUrl}
               onChange={this.handleImageChange}
-              name="imageUrl"
-              type="text"
               placeholder="Link to image for campus..."
             />
             <br />
             <label htmlFor="address">Address: </label>
             <input
               required
-              onChange={this.handleAddressChange}
-              value={this.state.address}
-              name="address"
               type="text"
+              name="address"
+              value={this.state.address}
+              onChange={this.handleAddressChange}
               placeholder="Campus Address"
             />
             <br />

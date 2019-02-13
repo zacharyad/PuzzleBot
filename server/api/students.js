@@ -6,7 +6,7 @@ router.get('/', async (req, res, next) => {
     const allStudents = await Student.findAll({ include: { all: true } });
     res.json(allStudents);
   } catch (error) {
-    console.log(error);
+    console.log('in post error', error);
     next(error);
   }
 });
@@ -14,7 +14,10 @@ router.get('/', async (req, res, next) => {
 router.get('/:studentId', async (req, res, next) => {
   try {
     const id = req.params.studentId;
-    const singleStudent = await Student.findAll({ where: { id } });
+    const singleStudent = await Student.findAll({
+      where: { id },
+      include: { all: true },
+    });
     res.json(singleStudent);
   } catch (error) {
     console.log(error);
