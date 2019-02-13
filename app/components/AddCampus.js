@@ -53,11 +53,13 @@ export class AddCampus extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <div>
-        <h2>Add Campus</h2>
+      <div className={`wrapper`}>
+        <h2>Add Campus Page</h2>
+        <hr />
         <div className="form-Wrapper">
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="name">Name: </label>
+            <h3>Name</h3>
+            <label htmlFor="name" />
             <input
               required
               onChange={this.handleNameChange}
@@ -67,8 +69,11 @@ export class AddCampus extends React.Component {
               placeholder="Name of Campus..."
             />
             <br />
-            <label htmlFor="description">Description: </label>
-            <input
+            <h3>Description</h3>
+            <label htmlFor="description" />
+            <textarea
+              rows="20"
+              cols="50"
               name="description"
               type="text"
               value={this.state.description}

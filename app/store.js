@@ -132,7 +132,7 @@ export const fetchStudents = () => {
       const action = gotStudentsFromServer(data);
       dispatch(action);
     } catch (error) {
-      console.log(error);
+      console.log('error getting all students', error);
     }
   };
 };
@@ -153,6 +153,18 @@ export const addStudentToServer = stuObj => {
   return async dispatch => {
     try {
       const { data } = await axios.post(`/api/students/add`, stuObj);
+      const action = addStudent(data);
+      dispatch(action);
+    } catch (error) {
+      console.log('error from thunk: ', error);
+    }
+  };
+};
+
+export const removeStudentFromServer = id => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.delete(`/api/students/${id}`);
       const action = addStudent(data);
       dispatch(action);
     } catch (error) {

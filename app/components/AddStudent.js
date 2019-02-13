@@ -59,8 +59,9 @@ export class AddStudent extends React.Component {
   render() {
     console.log('from the render for nameChangeHandler ', this.state);
     return (
-      <div>
+      <div className={`wrapper`}>
         <h2>Add Student</h2>
+        <hr />
         <div className="form-Wrapper">
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="name">First Name: </label>

@@ -6,7 +6,6 @@ router.get('/', async (req, res, next) => {
     const allStudents = await Student.findAll({ include: { all: true } });
     res.json(allStudents);
   } catch (error) {
-    //Come back to add a stock error page
     console.log(error);
     next(error);
   }
@@ -15,12 +14,9 @@ router.get('/', async (req, res, next) => {
 router.get('/:studentId', async (req, res, next) => {
   try {
     const id = req.params.studentId;
-    const singleStudent = await Student.findAll({
-      where: { id },
-    });
+    const singleStudent = await Student.findAll({ where: { id } });
     res.json(singleStudent);
   } catch (error) {
-    //Come back to add a stock error page
     console.log(error);
     next(error);
   }
@@ -32,6 +28,16 @@ router.post('/add', async (req, res, next) => {
     res.json(studentsToAdd);
   } catch (error) {
     console.log(error);
+    next(error);
+  }
+});
+
+router.delete('/:campusId', async (req, res, next) => {
+  try {
+    const id = req.params.campusId;
+    const deletedStudent = await Student.destroy({ where: { id } });
+    res.status(204).end();
+  } catch (error) {
     next(error);
   }
 });

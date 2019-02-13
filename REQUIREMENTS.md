@@ -20,7 +20,7 @@ The requirements below are broken into separate **tiers**, which model the way w
   - [x ] imageUrl - with a default value
   - [x ] gpa - decimal between 0.0 and 4.0
     <!-- NEED TO UNDERSTAND THIS -- BETTER NOT DONE YET -->
-- [ ] Students may be associated with at most one campus. Likewise, campuses may be associated with many students
+- [x ] Students may be associated with at most one campus. Likewise, campuses may be associated with many students
 
 - [ x] Write a route to serve up all students
 - [ x] Write a route to serve up all campuses
@@ -51,25 +51,25 @@ Congrats! You have completed your first vertical slice! Make sure to `commit -m 
 
 #### Backend
 
-- [ ] Write a route to serve up a single campus (based on its id), _including that campuses' students_
-- [ ] Write a route to serve up a single student (based on their id), _including that student's campus_
+- [ x] Write a route to serve up a single campus (based on its id), _including that campuses' students_
+- [ x] Write a route to serve up a single student (based on their id), _including that student's campus_
 
 #### Frontend
 
-- [ ] Write a component to display a single campus with the following information:
-  - [ ] The campus's name, image, address and description
+- [ x] Write a component to display a single campus with the following information:
+  - [ x] The campus's name, image, address and description
   - [ ] A list of the names of all students in that campus (or a helpful message if it doesn't have any students)
-- [ ] Display the appropriate campus's info when the url matches `/campuses/:campusId`
-- [ ] Clicking on a campus from the all-campuses view should navigate to show that campus in the single-campus view
+- [ x] Display the appropriate campus's info when the url matches `/campuses/:campusId`
+- [x ] Clicking on a campus from the all-campuses view should navigate to show that campus in the single-campus view
 
-- [ ] Write a component to display a single student with the following information:
-  - [ ] The student's full name, email, image, and gpa
+- [x ] Write a component to display a single student with the following information:
+  - [x ] The student's full name, email, image, and gpa
   - [ ] The name of their campus (or a helpful message if they don't have one)
-- [ ] Display the appropriate student when the url matches `/students/:studentId`
-- [ ] Clicking on a student from the all-students view should navigate to show that student in the single-student view
+- [ x] Display the appropriate student when the url matches `/students/:studentId`
+- [x ] Clicking on a student from the all-students view should navigate to show that student in the single-student view
 
-- [ ] Clicking on the name of a student in the single-campus view should navigate to show that student in the single-student view
-- [ ] Clicking on the name of a campus in the single-student view should navigate to show that campus in the single-campus view
+- [x ] Clicking on the name of a student in the single-campus view should navigate to show that student in the single-student view
+- [x ] Clicking on the name of a campus in the single-student view should navigate to show that campus in the single-campus view
 
 Congrats! You have completed your second vertical slice! Make sure to `commit -m "Feature: Get Single Campus and Student"` before moving on (see `RUBRIC.md` - points are awarded/deducted for a proper git workflow)!
 
@@ -81,23 +81,23 @@ Congrats! You have completed your second vertical slice! Make sure to `commit -m
 
 #### Backend
 
-- [ ] Write a route to add a new campus
-- [ ] Write a route to add a new student
+- [ x] Write a route to add a new campus
+- [x ] Write a route to add a new student
 
 #### Frontend
 
-- [ ] Write a component to display a form for adding a new campus that contains inputs for _at least_ the name and address.
-- [ ] Display this component EITHER as part of the all-campuses view, or as its own view
-- [ ] Submitting the form with a valid name/address should:
+- [x ] Write a component to display a form for adding a new campus that contains inputs for _at least_ the name and address.
+- [ x] Display this component EITHER as part of the all-campuses view, or as its own view
+- [ x] Submitting the form with a valid name/address should:
 
-  - [ ] Make an AJAX request that causes the new campus to be persisted in the database
-  - [ ] Add the new campus to the list of campuses without needing to refresh the page
+  - [ x] Make an AJAX request that causes the new campus to be persisted in the database
+  - [x ] Add the new campus to the list of campuses without needing to refresh the page
 
-- [ ] Write a component to display a form for adding a new student that contains inputs for _at least_ first name, last name and email
-- [ ] Display this component EITHER as part of the all-students view, or as its own view
-- [ ] Submitting the form with a valid first name/last name/email should:
-  - [ ] Make an AJAX request that causes the new student to be persisted in the database
-  - [ ] Add the new student to the list of students without needing to refresh the page
+- [x ] Write a component to display a form for adding a new student that contains inputs for _at least_ first name, last name and email
+- [ x] Display this component EITHER as part of the all-students view, or as its own view
+- [ x] Submitting the form with a valid first name/last name/email should:
+  - [x ] Make an AJAX request that causes the new student to be persisted in the database
+  - [x ] Add the new student to the list of students without needing to refresh the page
 
 Congrats! You have completed your third vertical slice! Make sure to `commit -m "Feature: Add Campus and Student"` before moving on (see `RUBRIC.md` - points are awarded/deducted for a proper git workflow)!
 
@@ -109,8 +109,8 @@ Congrats! You have completed your third vertical slice! Make sure to `commit -m 
 
 #### Backend
 
-- [ ] Write a route to remove a campus (based on its id)
-- [ ] Write a route to remove a student (based on their id)
+- [ x] Write a route to remove a campus (based on its id)
+- [x ] Write a route to remove a student (based on their id)
 
 #### Frontend
 

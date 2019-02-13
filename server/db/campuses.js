@@ -10,7 +10,7 @@ const Campus = db.define('campus', {
     },
   },
   imageUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue:
       'https://www.timberlakechurch.com/hs-fs/hubfs/image-placeholder.jpg?width=200&height=200&name=image-placeholder.jpg',
   },
