@@ -7,7 +7,7 @@ export class Campus extends React.Component {
     super(props);
   }
   componentDidMount() {
-    this.props.fetchSingleCampus();
+    this.props.fetchSingleCampus(this.props.campus.id);
   }
   render() {
     const campus = this.props.campus;
@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSingleCampus: () => dispatch(fetchSingleCampus()),
+  fetchSingleCampus: id => dispatch(fetchSingleCampus(id)),
 });
 
 export default connect(

@@ -36,7 +36,7 @@ export class CampusList extends React.Component {
                 onClick={() => this.campusRemoveHandler(campus.id)}
                 type="button"
               >
-                <strong>X</strong>
+                <strong>{`Delete ${campus.name}`}</strong>
               </button>
               <hr />
             </div>
