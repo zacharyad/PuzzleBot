@@ -41,7 +41,7 @@ export class AddStudent extends React.Component {
     const lastName = this.state.lastName;
     const email = this.state.email;
     const gpa = parseFloat(this.state.gpa);
-    const imageUrl = this.state.lastName;
+    const imageUrl = this.state.imageUrl;
 
     const studentDataToSend = {
       firstName,
@@ -85,7 +85,7 @@ export class AddStudent extends React.Component {
             <input
               name="description"
               onChange={this.onGpaChange}
-              type="number"
+              type="text"
               min="0.0"
               max="4.0"
               value={this.state.gpa}

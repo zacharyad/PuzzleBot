@@ -36,6 +36,7 @@ import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-t
 //ACTION TYPES
 const GOT_ALL_CAMPUSES_FROM_SERVER = 'GOT_ALL_CAMPUSES_FROM_SERVER';
 const GOT_A_SINGLE_CAMPUS = 'GOT_A_SINGLE_CAMPUS';
+const ADD_CAMPUS = 'ADD_CAMPUS';
 
 //ACTION CREATORS
 const gotAllCampusesFromStore = allCampuses => {
@@ -48,6 +49,13 @@ const gotASingleCampus = campus => {
   return {
     type: GOT_A_SINGLE_CAMPUS,
     campus,
+  };
+};
+
+const addCampusToServer = campusObj => {
+  return {
+    type: ADD_CAMPUS,
+    campusObj,
   };
 };
 //THUNK CREATORS
@@ -68,6 +76,18 @@ export const fetchSingleCampus = id => {
     try {
       const { data } = await axios.get(`/api/campuses/${id}`);
       const action = gotASingleCampus(data);
+      dispatch(action);
+    } catch (error) {
+      console.log('error from thunk: ', error);
+    }
+  };
+};
+
+export const addCampusThunk = campusObj => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.post(`/api/campuses/add`, campusObj);
+      const action = addCampusToServer(data);
       dispatch(action);
     } catch (error) {
       console.log('error from thunk: ', error);
@@ -171,6 +191,13 @@ const campusesReducer = (state = initialState, action) => {
       const newState = {
         ...state,
         singleCampus: action.campus,
+      };
+      return newState;
+    }
+    case ADD_CAMPUS: {
+      const newState = {
+        ...state,
+        campusesList: [...state.campusesList, action.campusObj],
       };
       return newState;
     }
