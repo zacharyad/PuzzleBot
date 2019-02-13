@@ -82,6 +82,7 @@ export const fetchSingleCampus = id => {
 //Action types
 const GOT_ALL_STUDENTS_FROM_SERVER = 'GOT_ALL_STUDENTS_FROM_SERVER';
 const GOT_SINGLE_STUDENT = 'GOT_SINGLE_STUDENT';
+const ADD_STUDENT = 'ADD_STUDENT';
 //action creators
 const gotStudentsFromServer = studentsArrOfObjs => {
   return {
@@ -94,6 +95,13 @@ const gotASingleStudent = student => {
   return {
     type: GOT_SINGLE_STUDENT,
     student,
+  };
+};
+
+const addStudent = newStuObj => {
+  return {
+    type: ADD_STUDENT,
+    newStuObj,
   };
 };
 //thunk creators
@@ -117,6 +125,21 @@ export const fetchSingleStudent = id => {
       dispatch(action);
     } catch (error) {
       console.log('error from thunk: ', error);
+    }
+  };
+};
+
+export const addStudentToServer = stuObj => {
+  return async dispatch => {
+    try {
+      console.log('in thunk, stuObj: ', stuObj);
+      const { data } = await axios.post(`/api/students/add`, stuObj);
+      const action = addStudent(data);
+      dispatch(action);
+      return true;
+    } catch (error) {
+      console.log('error from thunk: ', error);
+      return false;
     }
   };
 };
@@ -155,6 +178,13 @@ const campusesReducer = (state = initialState, action) => {
       const newState = {
         ...state,
         singleStudent: action.student,
+      };
+      return newState;
+    }
+    case ADD_STUDENT: {
+      const newState = {
+        ...state,
+        studentList: [...state.studentList, action.newStuObj],
       };
       return newState;
     }
