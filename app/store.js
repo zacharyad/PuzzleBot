@@ -152,14 +152,11 @@ export const fetchSingleStudent = id => {
 export const addStudentToServer = stuObj => {
   return async dispatch => {
     try {
-      console.log('in thunk, stuObj: ', stuObj);
       const { data } = await axios.post(`/api/students/add`, stuObj);
       const action = addStudent(data);
       dispatch(action);
-      return true;
     } catch (error) {
       console.log('error from thunk: ', error);
-      return false;
     }
   };
 };

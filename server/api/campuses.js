@@ -21,7 +21,7 @@ router.get('/:campusId', async (req, res, next) => {
     res.json(singleCampuses);
   } catch (error) {
     console.log(error);
-    nexrt(error);
+    next(error);
   }
 });
 
