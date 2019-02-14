@@ -5,7 +5,6 @@ import Header from './Header';
 import CampusList from './CampusList';
 import StudentList from './StudentList';
 import SplashHero from './SplashHero';
-import Student from './Student';
 import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
 import AddCampus from './AddCampus';

@@ -28,9 +28,13 @@ export class SingleStudent extends React.Component {
             <h5>{`Email: ${student.email}`}</h5>
             <h5>{`GPA: ${student.gpa}`}</h5>
             <img src={student.imageUrl} />
-            <Link to={`/campuses/${student.campus.id}`}>
-              <h4>{this.findCampus(student.campusId)}</h4>
-            </Link>
+            {student.campus ? (
+              <Link to={`/campuses/${student.campus.id}`}>{`Student's Campus: ${
+                student.campus.name
+              }`}</Link>
+            ) : (
+              <Link to={`/students`}>No Campus, Yet!</Link>
+            )}
           </div>
         ) : (
           <div>Sorry no student</div>
@@ -54,3 +58,9 @@ export default withRouter(
     mapDispatchToProps
   )(SingleStudent)
 );
+
+{
+  /* <Link to={`/campuses/${student.campus.id}`}>
+              <h4>{this.findCampus(student.campusId)}</h4>
+            </Link> */
+}

@@ -124,7 +124,7 @@ export class AddStudent extends React.Component {
             />
             <br />
             <select onChange={this.onSelectCampus}>
-              <option>Select a Campus</option>
+              <option value="Sorry No Campus Selected">Select a Campus</option>
               {this.props.allCampuses[0] ? (
                 this.props.allCampuses.map(campus => (
                   <option value={campus.id} key={campus.id}>

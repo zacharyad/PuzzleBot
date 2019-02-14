@@ -217,7 +217,7 @@ const Reducer = (state = initialState, action) => {
     case GOT_SINGLE_STUDENT: {
       const newState = {
         ...state,
-        singleStudent: action.student,
+        singleStudent: { ...action.student },
       };
       return newState;
     }
