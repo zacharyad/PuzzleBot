@@ -15,7 +15,7 @@ const Root = () => {
         <Route exact path="/make_tweet" component={AddTweet} />
         <Route exact path="/get_answer" component={GetAnswer} />
         <Route exact path="/thank_you" component={ThankYou} />
-        <Route exact path="/home" component={Home} />
+        <Route exact path="/" component={Home} />
         {/* <Route exact path="/delete_tweet" component={DeleteForm} /> */}
       </Switch>
     </div>

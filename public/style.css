@@ -74,3 +74,16 @@ form button {
   background-color: #23232396;
   outline: none;
 }
+
+.centered {
+  display: flex;
+  justify-content: space-around;
+  margin: 0px 80px;
+}
+
+.centered * {
+  justify-self: center;
+}
+.font {
+  font-size: 30px;
+}

@@ -3,12 +3,11 @@ import { Route, Link, Switch } from 'react-router-dom';
 
 const Home = props => {
   return (
-    <div className=".centered">
-      <h2>Thanks for visiting PuzzleBot!</h2>
-      <h4>
+    <div className="centered">
+      <h2>
         Make puzzles, answer puzzles, share puzzles by retweeting them from{' '}
         <a href="https://twitter.com/ZacharyAdams"> @PuzzleBot </a>
-      </h4>
+      </h2>
       <ol>
         <li>
           To make a puzzle that shows up on PuzzleBot's twitter for all to

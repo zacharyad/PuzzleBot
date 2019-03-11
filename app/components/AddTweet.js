@@ -39,29 +39,31 @@ export class StudentList extends React.Component {
   render() {
     return (
       <div>
-        <h3>Remember:</h3>
-        <ol>
-          <li>Keep it clean, with no foul language.</li>
-          <li>
-            Keep the answer simple and uniform and using normal spacing and
-            casing (upper/lowercase).
-          </li>
-          <li>Keep the puzzle under 280 character.</li>
-        </ol>
+        <div className="centered">
+          <h3>Remember:</h3>
+          <ol>
+            <li>Keep it clean, with no foul language.</li>
+            <li>
+              Keep the answer simple and uniform and using normal spacing and
+              casing (upper/lowercase).
+            </li>
+            <li>Keep the puzzle under 280 character.</li>
+          </ol>
+        </div>
         <hr />
         <form onSubmit={this.handleSubmit}>
           <input
             maxLength="280"
             name="puzzle"
             type="text"
-            placeholder="This is the puzzle that will be tweeted."
+            placeholder="PuzzleBot will post this puzzle."
             onChange={this.handleChange}
           />
           <input
             maxLength="280"
             name="answer"
             type="text"
-            placeholder="This is the answer. Try to avoid extra characters"
+            placeholder="Answer to the above puzzle..."
             onChange={this.handleChange}
           />
           <button type="submit">Submit This Crytpic Tweet!</button>
