@@ -1,31 +1,24 @@
-'use strict'
+'use strict';
+const express = require('express');
+const path = require('path');
+const volleyball = require('volleyball');
+const app = express();
 
-const express = require('express')
-const path = require('path')
-const volleyball = require('volleyball')
-
-const app = express()
-
-// logging middleware
-app.use(volleyball)
-
-// body parsing middleware
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-// static middleware
-app.use(express.static(path.join(__dirname, '../public')))
-
-app.use('/api', require('./api')) // include our routes!
-
+//middleware
+app.use(volleyball);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../public')));
+//get to my api
+app.use('/api', require('./api'));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'))
-}) // Send index.html for any other requests
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
-// error handling middleware
+// errors
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(err.status || 500).send(err.message || 'Internal server error')
-})
+  console.error(err.stack);
+  res.status(err.status || 500).send(err.message || 'Server error');
+});
 
-module.exports = app
+module.exports = app;

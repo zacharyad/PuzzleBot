@@ -1,10 +1,10 @@
 {
-  "name": "senior-enrichment",
+  "name": "twitter_bot_crypt",
   "version": "0.0.1",
   "description": "A review time project",
   "main": "main.js",
   "scripts": {
-    "start:dev": "npm run build-watch & npm run start-server",
+    "start-dev": "npm run build-watch & npm run start-server",
     "start-server": "nodemon --watch server main.js -e html,js,css",
     "build-watch": "webpack -w",
     "start": "echo 'Running server for production - developers, use npm run start:dev for development' && node main",
@@ -17,9 +17,11 @@
   ],
   "dependencies": {
     "axios": "^0.18.0",
+    "bad-words": "^3.0.1",
     "body-parser": "^1.18.2",
     "chalk": "^2.4.1",
     "express": "^4.14.0",
+    "hash-generator": "^0.1.0",
     "pg": "^7.4.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -28,7 +30,8 @@
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.7",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^4.37.8"
+    "sequelize": "^4.37.8",
+    "twit": "^2.2.11"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

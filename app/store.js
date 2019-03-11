@@ -3,21 +3,39 @@ import { createStore, applyMiddleware } from 'redux';
 import axios from 'axios';
 import loggingMiddleware from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+
 ///////////////////
 // // campus reducer
 ///////////////////
 //ACTION TYPES
-const GOT_ALL_CAMPUSES_FROM_SERVER = 'GOT_ALL_CAMPUSES_FROM_SERVER';
+const TWEET_CREATED = 'GTWEET_CREATED';
+const CORRECT_GUESS = 'CORRECT_GUESS';
+const WRONG_GUESS = 'WRONG_GUESS';
+
 const GOT_A_SINGLE_CAMPUS = 'GOT_A_SINGLE_CAMPUS';
 const ADD_CAMPUS = 'ADD_CAMPUS';
 const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
 //ACTION CREATORS
-const gotAllCampusesFromServer = allCampuses => {
+const createdTweet = hashCode => {
   return {
-    type: GOT_ALL_CAMPUSES_FROM_SERVER,
-    allCampuses,
+    type: TWEET_CREATED,
+    hashCode,
   };
 };
+const gotCorrectAnswer = puzzle => {
+  return {
+    type: CORRECT_GUESS,
+    puzzle,
+  };
+};
+
+const gotWrongAnswer = guess => {
+  return {
+    type: WRONG_GUESS,
+    guess,
+  };
+};
+
 const gotASingleCampus = campus => {
   return {
     type: GOT_A_SINGLE_CAMPUS,
@@ -51,11 +69,11 @@ export const fetchCampuses = () => {
   };
 };
 
-export const fetchSingleCampus = id => {
+export const createTweet = tweet => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/campuses/${id}`);
-      const action = gotASingleCampus(data);
+      const { data } = await axios.post(`/api/puzzles`, tweet);
+      const action = createdTweet(data.hashCode);
       dispatch(action);
     } catch (error) {
       console.log(error);
@@ -63,17 +81,25 @@ export const fetchSingleCampus = id => {
   };
 };
 
-export const addCampusThunk = campusObj => {
+export const isCorrectGuess = guess => {
   return async dispatch => {
     try {
-      const { data } = await axios.post(`/api/campuses/add`, campusObj);
-      const action = addCampusToServer(data);
+      const { data } = await axios.get(
+        `/api/puzzles/${guess.hashCode}_${guess.answer}`
+      );
+      const action = gotCorrectAnswer(data);
       dispatch(action);
+      //making the tweet
     } catch (error) {
       console.log(error);
+      const wrongAction = gotWrongAnswer({
+        answer: `${guess.answer} is the wrong answer!`,
+      });
+      dispatch(wrongAction);
     }
   };
 };
+
 export const removeCampusFromServer = campusId => {
   return async dispatch => {
     try {
@@ -86,153 +112,43 @@ export const removeCampusFromServer = campusId => {
   };
 };
 
-///////////////////
-// // STUDENTS reducer
-///////////////////
-
-//Action types
-const GOT_ALL_STUDENTS_FROM_SERVER = 'GOT_ALL_STUDENTS_FROM_SERVER';
-const GOT_SINGLE_STUDENT = 'GOT_SINGLE_STUDENT';
-const ADD_STUDENT = 'ADD_STUDENT';
-const REMOVE_STUDENT = 'REMOVE_STUDENT';
-//action creators
-const gotStudentsFromServer = studentsArrOfObjs => {
-  return {
-    type: GOT_ALL_STUDENTS_FROM_SERVER,
-    studentsArrOfObjs,
-  };
-};
-
-const gotASingleStudent = student => {
-  return {
-    type: GOT_SINGLE_STUDENT,
-    student,
-  };
-};
-
-const addStudent = newStuObj => {
-  return {
-    type: ADD_STUDENT,
-    newStuObj,
-  };
-};
-
-const removeStudent = () => {
-  return {
-    type: REMOVE_STUDENT,
-  };
-};
-//thunk creators
-export const fetchStudents = () => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.get('/api/students');
-      const action = gotStudentsFromServer(data);
-      dispatch(action);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const fetchSingleStudent = id => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.get(`/api/students/${id}`);
-      const action = gotASingleStudent(data);
-      dispatch(action);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const addStudentToServer = stuObj => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.post(`/api/students/add`, stuObj);
-      const action = addStudent(data);
-      dispatch(action);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const removeStudentFromServer = id => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.delete(`/api/students/${id}`);
-      const action = removeStudent(data);
-      dispatch(action);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
 //STATE AND REDUCER
 const initialState = {
-  campusesList: [],
-  singleCampus: {},
-  studentList: [],
-  singleStudent: {},
+  hashCode: '',
+  correctAnswers: [],
+  guessCheck: [],
+  wrongAnswers: [],
 };
+// eslint-disable-next-line complexity
 const Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GOT_ALL_CAMPUSES_FROM_SERVER: {
+    case TWEET_CREATED: {
       const newState = {
         ...state,
-        campusesList: [...action.allCampuses],
+        hashCode: action.hashCode,
       };
       return newState;
     }
-    case ADD_CAMPUS: {
+    case CORRECT_GUESS: {
       const newState = {
         ...state,
-        campusesList: [...state.campusesList, action.campusObj],
+        correctAnswers: [
+          ...state.correctAnswers,
+          {
+            puzzle: action.puzzle.puzzle,
+            answer: action.puzzle.answer,
+            hashCode: action.puzzle.hashCode,
+          },
+        ],
+        guessCheck: [...state.guessCheck, action.puzzle.hashCode],
       };
       return newState;
     }
-    case GOT_A_SINGLE_CAMPUS: {
-      const newState = {
+    case WRONG_GUESS: {
+      return {
         ...state,
-        singleCampus: action.campus,
+        wrongAnswers: [...state.wrongAnswers, action.guess],
       };
-      return newState;
-    }
-    case REMOVE_CAMPUS: {
-      const newState = {
-        ...state,
-      };
-      return newState;
-    }
-    case GOT_ALL_STUDENTS_FROM_SERVER: {
-      const newState = {
-        ...state,
-        studentList: [...action.studentsArrOfObjs],
-      };
-      return newState;
-    }
-    case GOT_SINGLE_STUDENT: {
-      const newState = {
-        ...state,
-        singleStudent: { ...action.student },
-      };
-      return newState;
-    }
-    case ADD_STUDENT: {
-      const newState = {
-        ...state,
-        studentList: [...state.studentList, action.newStuObj],
-      };
-      return newState;
-    }
-    case REMOVE_STUDENT: {
-      const newState = {
-        ...state,
-      };
-      return newState;
     }
     default: {
       return state;
