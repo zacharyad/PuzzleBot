@@ -8,7 +8,6 @@ export class GetAnswer extends React.Component {
     this.state = {
       answer: '',
       hashCode: '',
-      wrongGuesses: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -23,8 +22,6 @@ export class GetAnswer extends React.Component {
     event.preventDefault();
     const hash = this.state.hashCode;
     const ans = this.state.answer;
-    if (this.props.guessCheck.includes(hash))
-      this.setState({ wrongGuesses: props.wrongGuesses.length });
     const submitGuess = {
       hashCode: hash,
       answer: ans,
@@ -35,32 +32,34 @@ export class GetAnswer extends React.Component {
   render() {
     return (
       <div>
-        {this.props.correctAnswers.length ? (
-          this.props.correctAnswers.map(elem => {
-            return `   |   CORRECT! Puzzle: ${elem.puzzle} Correct Answer: ${
-              elem.answer
-            }     `;
-          })
-        ) : (
-          <div>Correct Answers will display here.</div>
-        )}
-        <hr />
-        {`You have guessed incorrectly ${
-          this.props.wrongGuesses.length
-        } this round.`}
+        <div className="centered">
+          {this.props.correctAnswers.length ? (
+            this.props.correctAnswers.map(elem => {
+              return `   |   Correct! "${elem.answer}" is the answer to: "${
+                elem.puzzle
+              }".     `;
+            })
+          ) : (
+            <div>Correct Answers will display here.</div>
+          )}
+
+          <div>{`You have guessed incorrectly ${
+            this.props.wrongGuesses.length
+          } this round.`}</div>
+        </div>
         <form onSubmit={this.handleSubmit}>
           <input
             maxLength="12"
             name="hashCode"
             type="text"
-            placeholder="12 digit puzzle Code"
+            placeholder="12 digit puzzle Code."
             onChange={this.handleChange}
           />
           <input
             maxLength="280"
             name="answer"
             type="text"
-            placeholder="Best Guess"
+            placeholder="Best Guess."
             onChange={this.handleChange}
           />
           <button type="submit">Check My Guess</button>

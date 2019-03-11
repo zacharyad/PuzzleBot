@@ -7,7 +7,7 @@ const Header = props => {
       <nav className="header">
         <ul>
           <li>
-            <Link to="/home">
+            <Link to="/">
               <img width={50} src="./betterPuzzlePLogo.png" />
             </Link>
           </li>
